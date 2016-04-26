@@ -3,8 +3,6 @@
     <version>1</version>
     <dependencies>
         <dependency>profile-xmldirector.plonecore:default</dependency>
-        <!--
         <dependency>profile-pp.client.plone:default</dependency>
-        -->
     </dependencies>
 </metadata>
