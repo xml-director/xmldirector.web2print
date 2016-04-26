@@ -11,6 +11,10 @@
 <metal:main fill-slot="content-core">
     <metal:content-core define-macro="content-core">
 
+        <!--
+        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/jquery.form-validator.min.js"/>
+        -->
+        
         <style type="text/css">
             fieldset {
                 margin-bottom: 2em;
@@ -74,12 +78,14 @@
                 <div class="form-row" tal:repeat="d view/parse_template">
                     <span class="label" i18n:translate="" tal:content="d/id/capitalize"/>
                     <input type="text"
+                           data-validation="required"
                            tal:condition="python: d['type'] == 'string'"
                            tal:attributes="placeholder d/placeholder;
                                            name d/id;
                                            value python: request.form.get(d['id'], '')"
                     />
                     <textarea 
+                           data-validation="required"
                            tal:condition="python: d['type'] == 'text'"
                            tal:attributes="placeholder d/placeholder;
                                            name d/id"
@@ -105,6 +111,8 @@
             <legend i18n:translate="">Generated PDF</legend>
             <a tal:attributes="href request/output_url" tal:content="request/output_url" />
         </fieldset>
+
+        <script type="text/javascript"> $.validate(); </script>
   </metal:content-core>
 </metal:main>
 
