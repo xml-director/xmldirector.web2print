@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="xmldirector.web2print">
+<body>
+
+
+<metal:main fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+
+        <style type="text/css">
+            fieldset {
+                margin-bottom: 2em;
+            }
+        </style>
+
+        <h2 i18n:translate="">Web2Print</h2>
+
+        <fieldset>
+            <legend i18n:translate="">Template</legend>
+            <form method="get" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print">
+                <select name="template" id="template">
+                    <option tal:repeat="d view/available_templates" 
+                        tal:content="d/name"
+                        tal:attributes="value d/id">
+                </select>
+                <input class="context" type="submit" value="Choose template" i18n:attributes="value"/>
+            </form>
+        </fieldset>
+
+        <fieldset tal:condition="request/template | nothing">
+            <legend i18n:translate="">Data entry</legend>
+            <form method="post" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
+
+                <input type="hidden" name="template" tal:attributes="value request/template" />
+
+                <div class="form-row" tal:repeat="d view/parse_template">
+                    <span class="label" i18n:translate="" tal:content="d/id/capitalize"/>
+                    <input type="text"
+                           tal:attributes="placeholder d/placeholder;
+                                           name d/id;
+                                           value python: request.form.get(d['id'], '')"
+                    />
+
+                </div>
+
+                <input class="context" type="submit" value="Generate PDF" i18n:attributes="value"/>
+            </form>
+        </fieldset>
+
+        <fieldset tal:condition="request/output_url | nothing">
+            <legend i18n:translate="">Generated PDF</legend>
+            <a tal:attributes="href request/output_url" tal:content="request/output_url" />
+        </fieldset>
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

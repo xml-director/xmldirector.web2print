@@ -29,6 +29,7 @@ setup(name='xmldirector.web2print',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'lxml',
           'plone.app.testing',
           'xmldirector.plonecore',
           'pp.client-plone',
