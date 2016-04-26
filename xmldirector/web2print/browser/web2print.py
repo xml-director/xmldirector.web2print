@@ -114,7 +114,7 @@ class Web2Print(BrowserView):
             if not handle.exists('output'):
                 handle.makedir('output')
 
-            output_filename = 'output/{}.pdf'.format(datetime.datetime.utcnow().isoformat())                        
+            output_filename = 'output/{}.pdf'.format(datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
             with open(result['output_filename'], 'rb') as fp_in:
                 with handle.open(output_filename, 'wb') as fp_out:
                     fp_out.write(fp_in.read())
