@@ -32,20 +32,19 @@ class Web2Print(BrowserView):
         files = handle.listdir(files_only=True, wildcard='*html')
         for name in sorted(files):
 
+            # extract <title> from HTML
             with handle.open(name, 'rb') as fp:
                 root = lxml.html.fromstring(fp.read())
-
             nodes = root.xpath('//title')
             title = name
             if nodes:
                 title = nodes[0].text
-                print title
 
             result.append(dict(
                 id=fs.path.join(template_dir, name), 
                 title=title,
-                image_id=fs.path.join(template_dir, os.path.splitext(name)[0] + '.png'),
-                name=name)) 
+                image_id=fs.path.join(template_dir, os.path.splitext(name)[0] + '.png')
+                
         return result
 
 
