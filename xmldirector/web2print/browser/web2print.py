@@ -32,6 +32,7 @@ class Web2Print(BrowserView):
         for name in sorted(files):
             result.append(dict(
                 id=fs.path.join(template_dir, name), 
+                image_id=fs.path.join(template_dir, os.path.splitext(name)[0] + '.png'),
                 name=name)) 
         return result
 
@@ -59,7 +60,6 @@ class Web2Print(BrowserView):
                 type=node_type))
         return result
 
-
     def generate_pdf(self):
 
         handle = self.context.get_handle()
@@ -75,7 +75,7 @@ class Web2Print(BrowserView):
         for k, v in self.request.form.items():
             node = root.find('.//*[@id="{}"]'.format(k))
             if node is not None:
-                node.text = v
+                node.text = unicode(v, 'utf8')
 
         # copy resources
         temp_dir = tempfile.mktemp()
@@ -90,7 +90,7 @@ class Web2Print(BrowserView):
 
         # write index.html
         with open(os.path.join(temp_dir, 'index.html'), 'wb') as fp:
-            fp.write(lxml.html.tostring(root, encoding=unicode))
+            fp.write(lxml.html.tostring(root, encoding='utf8'))
                                                                                                                                                
         # Read Produce & Publish server URL settings from Plone registry
         registry = getUtility(IRegistry)

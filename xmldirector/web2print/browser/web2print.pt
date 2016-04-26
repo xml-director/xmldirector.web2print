@@ -15,28 +15,72 @@
             fieldset {
                 margin-bottom: 2em;
             }
+            
+            .form-row {
+                margin-bottom: 1em;
+            }
+            
+            .form-row .label {
+                font-weight: bold;
+            }
+
+            .preview {
+                float: left;
+                margin-right: 50px;
+            }
+
+            .preview-image {
+                max-width: 100px;
+                border: 2px solid grey;
+                padding: 3px;
+            }
+
+            .preview-image.selected {
+                border: 4px solid green;
+            }
+
+            fieldset#form {
+                float: left;
+                width: 45%;
+            }
+
+            fieldset#nimbudocs {
+                float: right;
+                width: 45%;
+            }
+
         </style>
 
-        <h2 i18n:translate="">Web2Print</h2>
-
-        <fieldset>
-            <legend i18n:translate="">Template</legend>
+        <fieldset id="templates">
+            <legend i18n:translate="">Templates</legend>
+            <!--
             <form method="get" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print">
                 <select name="template" id="template">
                     <option tal:repeat="d view/available_templates" 
                         tal:content="d/name"
-                        tal:attributes="value d/id">
+                        tal:attributes="value d/id;
+                                        selected python: 'selected' if request.get('template') == d['id'] else ''">
                 </select>
+                <br/>
                 <input class="context" type="submit" value="Choose template" i18n:attributes="value"/>
             </form>
+            -->
+            <div>
+                <div class="preview" tal:repeat="d view/available_templates">
+                    <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print?template=${d/id}">
+                        <img 
+                            tal:attributes="src string:${context/absolute_url}/@@raw/${d/image_id};
+                                            class python: 'preview-image selected' if request.get('template') == d['id'] else 'preview-image'"/>
+                        <div class="preview-title" tal:content="d/name" />
+                    </a>
+                </div>
+            </div>
         </fieldset>
 
-        <fieldset tal:condition="request/template | nothing">
-            <legend i18n:translate="">Data entry</legend>
 
-            <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print-nimbudocs?template=${request/template}">
-                <button class="context">Open template in WYSIWYG editor</button>
-            </a>
+        <fieldset id="form" tal:condition="request/template | nothing">
+            <legend i18n:translate="">PDF generation via PDFreactor from form data</legend>
+
             <form method="post" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
 
                 <input type="hidden" name="template" tal:attributes="value request/template" />
@@ -44,9 +88,16 @@
                 <div class="form-row" tal:repeat="d view/parse_template">
                     <span class="label" i18n:translate="" tal:content="d/id/capitalize"/>
                     <input type="text"
+                           tal:condition="python: d['type'] == 'string'"
                            tal:attributes="placeholder d/placeholder;
                                            name d/id;
                                            value python: request.form.get(d['id'], '')"
+                    />
+                    <textarea 
+                           tal:condition="python: d['type'] == 'text'"
+                           tal:attributes="placeholder d/placeholder;
+                                           name d/id"
+                           tal:content="python: request.form.get(d['id'], '')"
                     />
 
                 </div>
@@ -54,6 +105,15 @@
                 <input class="context" type="submit" value="Generate PDF" i18n:attributes="value"/>
             </form>
         </fieldset>
+
+        <fieldset id="nimbudocs" tal:condition="request/template | nothing">
+            <legend i18n:translate="">Edit with Nimbudocs WYSIWYG editor</legend>
+            <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print-nimbudocs?template=${request/template}">
+                <button class="context">Open in Nimbudocs editor</button>
+            </a>
+        </fieldset>
+
+        <div style="clear"></div>
 
         <fieldset tal:condition="request/output_url | nothing">
             <legend i18n:translate="">Generated PDF</legend>
