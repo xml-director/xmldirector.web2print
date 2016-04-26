@@ -50,35 +50,19 @@
                 float: right;
                 width: 45%;
             }
-
         </style>
 
         <fieldset id="templates">
             <legend i18n:translate="">Templates</legend>
-            <!--
-            <form method="get" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print">
-                <select name="template" id="template">
-                    <option tal:repeat="d view/available_templates" 
-                        tal:content="d/name"
-                        tal:attributes="value d/id;
-                                        selected python: 'selected' if request.get('template') == d['id'] else ''">
-                </select>
-                <br/>
-                <input class="context" type="submit" value="Choose template" i18n:attributes="value"/>
-            </form>
-            -->
-            <div>
-                <div class="preview" tal:repeat="d view/available_templates">
-                    <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print?template=${d/id}">
-                        <img 
-                            tal:attributes="src string:${context/absolute_url}/@@raw/${d/image_id};
-                                            class python: 'preview-image selected' if request.get('template') == d['id'] else 'preview-image'"/>
-                        <div class="preview-title" tal:content="d/name" />
-                    </a>
-                </div>
+            <div class="preview" tal:repeat="d view/available_templates">
+                <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print?template=${d/id}">
+                    <img 
+                        tal:attributes="src string:${context/absolute_url}/@@raw/${d/image_id};
+                                        class python: 'preview-image selected' if request.get('template') == d['id'] else 'preview-image'"/>
+                    <div class="preview-title" tal:content="d/title" />
+                </a>
             </div>
         </fieldset>
-
 
         <fieldset id="form" tal:condition="request/template | nothing">
             <legend i18n:translate="">PDF generation via PDFreactor from form data</legend>

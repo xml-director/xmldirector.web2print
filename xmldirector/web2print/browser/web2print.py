@@ -12,6 +12,7 @@ import fs.path
 import datetime
 import shutil
 import tempfile
+import fs.path
 import lxml.html
 
 from zope.component import getUtility
@@ -30,8 +31,19 @@ class Web2Print(BrowserView):
         handle = self.context.get_handle(template_dir)
         files = handle.listdir(files_only=True, wildcard='*html')
         for name in sorted(files):
+
+            with handle.open(name, 'rb') as fp:
+                root = lxml.html.fromstring(fp.read())
+
+            nodes = root.xpath('//title')
+            title = name
+            if nodes:
+                title = nodes[0].text
+                print title
+
             result.append(dict(
                 id=fs.path.join(template_dir, name), 
+                title=title,
                 image_id=fs.path.join(template_dir, os.path.splitext(name)[0] + '.png'),
                 name=name)) 
         return result
