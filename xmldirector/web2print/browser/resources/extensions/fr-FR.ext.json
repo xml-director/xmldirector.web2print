@@ -1,0 +1,18 @@
+﻿{
+    "L_CONTAINER_FLOW_PANE":                    "Écoulement du conteneur",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_DEFAULT": "Au-dessus et en-dessous",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_LEFT":    "Gauche",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_RIGHT":   "Droite",
+    "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED":    "Refléter",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_DEFAULT":    "Normal",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_HORIZONTAL": "Horizontal",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_VERTICAL":   "Vertical",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_BOTH":       "L'un et l'autre",
+    "L_DRAW_SHAPE_BRUSH":                       "Balai",
+    "L_DRAW_SHAPE_BRUSH_TEXT":                  "Balai",
+    "L_IMAGE_FLOW_PANE":                        "Écoulement de l'image",
+    "L_STYLE_TEMPLATE_GROUP_IMAGE_FLOATED":     "Écoulement de l'image",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_DEFAULT":     "Au-dessus et en-dessous",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_LEFT":        "Gauche",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_RIGHT":       "Droite"
+}

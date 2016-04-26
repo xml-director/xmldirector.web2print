@@ -13,6 +13,7 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".controlpanel.Web2PrintSettingsControlPanel"
         permission="cmf.ManagePortal"
+        layer="xmldirector.web2print.interfaces.IBrowserLayer"
     />
 
     <browser:page
@@ -21,6 +22,16 @@
         class=".web2print.Web2Print"
         template="web2print.pt"
         permission="cmf.ModifyPortalContent"
+        layer="xmldirector.web2print.interfaces.IBrowserLayer"
+    />
+
+    <browser:page
+        name="xmldirector-web2print-nimbudocs"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".web2print.Web2Print"
+        template="nimbudocs.pt"
+        permission="cmf.ModifyPortalContent"
+        layer="xmldirector.web2print.interfaces.IBrowserLayer"
     />
 
     <browser:page
@@ -29,7 +40,13 @@
         class=".web2print.Web2Print"
         attribute="generate_pdf"
         permission="cmf.ModifyPortalContent"
+        layer="xmldirector.web2print.interfaces.IBrowserLayer"
     />
 
+    <browser:resourceDirectory
+        name="xmldirector.web2print"
+        directory="resources"
+        layer="xmldirector.web2print.interfaces.IBrowserLayer"
+    />
 
 </configure>

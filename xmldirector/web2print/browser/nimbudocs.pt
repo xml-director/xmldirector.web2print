@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="user-scalable=no" />
+        
+        <title>Nimbudocs Editor minimum integration</title>
+        
+        <!-- This script is found on the nimbudocs server. An absolute URL to the script should be used. -->
+        <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
+        <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
+        <script type="text/javascript" tal:content="string:CONTENT_URL = '${python: context.absolute_url() + '/@@view/' + request.get('template')}'"></script>
+        <script type="text/javascript" tal:content="string:PREFIX = PORTAL_URL + '/++resource++xmldirector.web2print'"></script>
+        <script>
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+
+                var options = {
+                    collabUrl: "collab.html",
+                    uiConfig:           PREFIX + "/extensions/uiconfig.json",
+                    actionMapExtension: PREFIX + "/extensions/actionMap.ext.json",
+                    localeExtension: {
+                        "en-US": PREFIX + "/extensions/en-US.ext.json",
+                        "de-DE": PREFIX + "/extensions/de-DE.ext.json",
+                        "fr-FR": PREFIX + "/extensions/fr-FR.ext.json"
+                    },
+                    userAgentStylesFromUrl: PREFIX + "extensions/requiredStyleTemplates.css",
+                    onready: function() {
+                        editor = this;
+                        editor.loadDocumentFromUrl(CONTENT_URL);
+                        editor.invokeAction('zoom-mode-window-height-client');
+                    },
+                    onnotsupported: function() {
+                        alert("This browser does not meet the requirements of Nimbudocs Editor.");
+                    },
+                    "presetcolors": {
+                        "Crimson": "#DC143C",
+                        "Dark olive green": "#556B2F",
+                        "F0FFF0": "#F0FFF0",
+                    },
+                    "autocorrect": {
+                        "enabled": true,
+                        "correctors": {
+                            "autohyperlinking": true,
+                            "sentencestartuppercase": true,
+                            "cellstartuppercase": true,
+                            "expressionreplacer": true,
+                            "wordstartcapslock": true 
+                        },
+                        "presetcorrections": {
+                            "": {
+                                "1/4": "¼",
+                                "1/2": "½",
+                                "3/4": "¾",
+                                "(r)": "®",
+                                "(c)": "©",
+                                "tm": "™",
+                                ":-)": "☺",
+                                "-->": "→",
+                                "<--": "←",
+                                "<->": "↔"
+                            },
+                            "en-US": {
+                                "i.e.": "that is",
+                                "e.g.": "for example" 
+                            },
+                            "de-DE": {
+                                "d.h.": "das heißt",
+                                "evtl.": "eventuell" 
+                            },
+                            "fr-FR": {
+                                "s.o.": "sans objet",
+                                "n.a.": "non applicable",
+                                "p.": "page" 
+                            } 
+                        } 
+                    },
+                    "allowdefaultcolors": true,
+                    "allowpresetcolors": true,
+                    "allowfreecolors": true,
+                    widgets: {
+                        sidebar: {
+                            alwaysOpen: false
+                        },
+                        searchbar: {
+                            position: "top-right",
+                            simple: false
+                        }
+                    }
+                };
+
+
+                    /* Run Nimbudocs Editor and pass the loaded data as document constructor option */
+                    var isSupported = NimbudocsEditor.create("nimbuContainer", "http://eubeta.nimbudocs.com/", options);
+                    
+                    if(!isSupported) {
+                        alert("This browser does not meet the requirements of Nimbudocs Editor.");
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="nimbuContainer">
+        </div>
+    </body>
+</html>

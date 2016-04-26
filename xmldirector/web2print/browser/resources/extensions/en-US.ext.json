@@ -1,0 +1,18 @@
+﻿{
+    "L_CONTAINER_FLOW_PANE":                    "Container Flow",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_DEFAULT": "Above and below",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_LEFT":    "Left",
+    "L_STYLE_TEMPLATE_CONTAINER_FLOAT_RIGHT":   "Right",
+    "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED":    "Mirror image",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_DEFAULT":    "Normal",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_HORIZONTAL": "Horizontal",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_VERTICAL":   "Vertical",
+    "L_STYLE_TEMPLATE_IMAGE_MIRROR_BOTH":       "Both",
+    "L_DRAW_SHAPE_BRUSH":                       "Brush",
+    "L_DRAW_SHAPE_BRUSH_TEXT":                  "Brush",
+    "L_IMAGE_FLOW_PANE":                        "Image Flow",
+    "L_STYLE_TEMPLATE_GROUP_IMAGE_FLOATED":     "Float image",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_DEFAULT":     "Above and below",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_LEFT":        "Left",
+    "L_STYLE_TEMPLATE_IMAGE_FLOAT_RIGHT":       "Right"
+}

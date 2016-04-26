@@ -1,0 +1,706 @@
+{
+    "toolbar": {
+        "quickactions": [
+            "new-document",
+            "load-url-dialog",
+            "undo",
+            "redo",
+            "decrease-zoom-client",
+            "zoom-100-client",
+            "increase-zoom-client"
+        ],
+        "ribbons": {
+            "options": {
+                "sortabletabs": "false"
+            },
+            "elements": {
+                "L_EDIT_TAB": {
+                    "shortcut": "msck shift e",
+                    "L_DOCUMENT_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "new-document",
+                                    "load-url-dialog",
+                                    "page-properties-dialog",
+                                    "create-pdf-dialog",
+                                    "print-dialog",
+                                    "source-view-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_CLIPBOARD_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "tinyPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "paste-browser",
+                                    "copy-browser",
+                                    "cut-browser"
+                                ]
+                            },
+                            {
+                                "size": "tinyPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "paste-mode-keep-formatting",
+                                    "paste-mode-match-destination",
+                                    "paste-mode-text-only"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_EDITING_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "select-all",
+                                    "find-replace-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_FORMAT_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "smallPanel",
+                                "actions": [
+                                    "bold",
+                                    "italic",
+                                    "underline",
+                                    "script-sub",
+                                    "script-super",
+                                    "strikethrough",
+                                    "color-dialog",
+                                    "backgroundcolor-dialog",
+                                    "change-case-dialog",
+                                    "clear-formatting",
+                                    "format-painter"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_FONT_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "dropdownPanel",
+                                "comboactions": {
+                                    "font-family": {
+                                        "options": {
+                                            "comboWidth": "150",
+                                            "dropdownWidth": "150"
+                                        },
+                                        "dropdownactions": "font-family-toolbar"
+                                    },
+                                    "font-size": {
+                                        "options": {
+                                            "comboWidth": "150",
+                                            "dropdownWidth": "150"
+                                        },
+                                        "dropdownactions": {
+                                            "font-size-default": "",
+                                            "font-size-8": "",
+                                            "font-size-9": "",
+                                            "font-size-10": "",
+                                            "font-size-11": "",
+                                            "font-size-12": "",
+                                            "font-size-14": "",
+                                            "font-size-16": "",
+                                            "font-size-18": "",
+                                            "font-size-20": "",
+                                            "font-size-22": "",
+                                            "font-size-24": "",
+                                            "font-size-26": "",
+                                            "font-size-28": "",
+                                            "font-size-36": "",
+                                            "font-size-48": "",
+                                            "font-size-72": ""
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "L_PARAGRAPH_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "smallPanel",
+                                "actions": [
+                                    "align-left",
+                                    "align-center",
+                                    "align-right",
+                                    "align-justify",
+                                    "list-ordered",
+                                    "list-unordered",
+                                    "decrease-indent",
+                                    "increase-indent"
+                                ]
+                            },
+                            {
+                                "size": "dropdownPanel",
+                                "comboactions": {
+                                    "line-height": {
+                                        "options": {
+                                            "comboWidth": "150",
+                                            "dropdownWidth": "150"
+                                        },
+                                        "dropdownactions": {
+                                            "line-height-default": "",
+                                            "line-height-100": "",
+                                            "line-height-125": "",
+                                            "line-height-150": "",
+                                            "line-height-175": "",
+                                            "line-height-200": ""
+                                        }
+                                    },
+                                    "paragraph-margin": {
+                                        "options": {
+                                            "comboWidth": "150",
+                                            "dropdownWidth": "150"
+                                        },
+                                        "dropdownactions": {
+                                            "paragraph-margin-default": "",
+                                            "paragraph-margin-0": "",
+                                            "paragraph-margin-50": "",
+                                            "paragraph-margin-100": "",
+                                            "paragraph-margin-150": "",
+                                            "paragraph-margin-200": "",
+                                            "paragraph-margin-250": "",
+                                            "paragraph-margin-300": ""
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "L_DOCUMENT_ELEMENTS_TAB": {
+                    "shortcut": "msck shift r",
+                    "L_OBJECT_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "insert-hyperlink-dialog",
+                                    "insert-bookmark-dialog",
+                                    "insert-special-character-dialog",
+                                    "insert-mathml-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_INSERT_IMAGE_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "actions": [
+                                     "insert-image-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_INSERT_TABLE_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "actions": [
+                                    "insert-table-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_CONTAINER_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "actions": [
+                                    "insert-container"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "L_LAYOUT_TAB": {
+                    "L_BREAKS_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "insert-page-break",
+                                    "insert-line-break"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_IMAGE_FLOW_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "tinyPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "template-set-float-default-image",
+                                    "template-set-float-left-image",
+                                    "template-set-float-right-image"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_CONTAINER_FLOW_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "tinyPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "template-set-float-default",
+                                    "template-set-float-left",
+                                    "template-set-float-right"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "L_TABLE_TAB": {
+                    "L_INSERT_TABLE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "actions": [
+                                    "insert-table-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_TABLE_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "split-table",
+                                    "merge-table",
+                                    "delete-table",
+                                    "table-properties-dialog",
+                                    "convert-table",
+                                    "auto-fit-table-content"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_ROW_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "insert-row-before",
+                                    "insert-row-after",
+                                    "delete-row",
+                                    "row-properties-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_COLUMN_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "insert-column-before",
+                                    "insert-column-after",
+                                    "delete-column",
+                                    "column-properties-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_CELL_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "merge-cells",
+                                    "split-cell-dialog",
+                                    "cell-properties-dialog"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "L_REVIEW_TAB": {
+                    "shortcut": "msck shift z",
+                    "L_ANNOTATION_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "insert-annotation-dialog"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "edit-annotation-dialog",
+                                    "remove-annotation"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_PROOFING_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "toggle-auto-spellcheck",
+                                    "change-language-dialog",
+                                    "spellcheck-dialog",
+                                    "auto-correct-dialog"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_TRACK_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "track-changes",
+                                    "change-list-dialog"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "accept-change",
+                                    "reject-change"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "accept-all-changes",
+                                    "reject-all-changes"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "goto-prev-change",
+                                    "goto-next-change"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "false",
+                                "actions": [
+                                    "accept-change-gonext",
+                                    "reject-change-gonext"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_VIEW_CHANGES_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-final",
+                                    "show-changes-original"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-final-bubble",
+                                    "show-changes-original-bubble"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-mixed-inline"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_COLLABORATION_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "toggle-collab-mode"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "L_VIEW_TAB": {
+                    "shortcut": "msck shift u",
+                    "L_MARKERS_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "toggle-show-marks-client",
+                                    "toggle-show-table-grid-client",
+                                    "toggle-show-container-grid-client",
+                                    "toggle-read-only-view"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_ZOOM_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "zoom-mode-window-width-client",
+                                    "zoom-mode-window-height-client"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "increase-zoom-client",
+                                    "decrease-zoom-client",
+                                    "zoom-100-client"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_DOCUMENT_VIEW_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "page-mode-continuous",
+                                    "page-mode-single-sided"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_VIEW_CHANGES_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-final",
+                                    "show-changes-original"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-final-bubble",
+                                    "show-changes-original-bubble"
+                                ]
+                            },
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "show-changes-mixed-inline"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_VIEW_ANNOTATIONS_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "show-annotations-bubbles",
+                                    "show-annotations-inline"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "L_SHAPE_TAB": {
+                    "shortcut": "msck shift o",
+                    "L_INSERT_SHAPE_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "actions": [
+                                    "draw-shape-box",
+                                    "draw-shape-circle",
+                                    "draw-shape-line",
+                                    "draw-shape-arrow",
+                                    "draw-shape-freehand",
+                                    "draw-shape-brush"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_SHAPE_ZINDEX_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "mediumPanel",
+                                "displaytext": "true",
+                                "actions": [
+                                    "move-shape-front",
+                                    "move-shape-back",
+                                    "move-shape-front-step",
+                                    "move-shape-back-step"
+                                ]
+                            }
+                        ]
+                    },
+                    "L_SHAPE_PROPERTIES_PANE": {
+                        "subpanels": [
+                            {
+                                "size": "largePanel",
+                                "actions": [
+                                    "shape-properties-dialog"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "contextmenu": [
+        [
+            {
+                "name": "L_SPELLCHECKER_SUGGESTIONS",
+                "menuid": "spellcheckmenu",
+                "items": [
+                    [
+                        "spellcheck-suggestions"
+                    ],
+                    [
+                        "spellcheck-ignore-all",
+                        "spellcheck-add-word"
+                    ]
+                ]
+            }
+        ],
+        [
+            {
+                "name": "L_ALIGN",
+                "menuid": "alignmenu",
+                "items": [
+                    "align-left",
+                    "align-center",
+                    "align-right",
+                    "align-justify"
+                ]
+            },
+            {
+                "name": "L_CONTEXT_STYLE",
+                "menuid": "stylemenu",
+                "items": [
+                    [
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strikethrough"
+                    ],
+                    [
+                        "script-super",
+                        "script-sub"
+                    ]
+                ]
+            }
+        ],
+        {
+            "name": "L_TABLE_PANE",
+            "menuid": "tablemenu",
+            "items": [
+                [
+                    "table-properties-dialog"
+                ],
+                [
+                    {
+                        "name": "L_COLUMN_PANE",
+                        "menuid": "columnmenu",
+                        "items": [
+                            "column-properties-dialog",
+                            "insert-column-before",
+                            "insert-column-after",
+                            "delete-column"
+                        ]
+                    },
+                    {
+                        "name": "L_ROW_PANE",
+                        "menuid": "rowmenu",
+                        "items": [
+                            "row-properties-dialog",
+                            "insert-row-before",
+                            "insert-row-after",
+                            "delete-row"
+                        ]
+                    },
+                    {
+                        "name": "L_CELL_PANE",
+                        "menuid": "cellmenu",
+                        "items": [
+                            "cell-properties-dialog",
+                            "merge-cells",
+                            "split-cell-dialog"
+                        ]
+                    }
+                ],
+                [
+                    "delete-table"
+                ]
+            ]
+        },
+        {
+            "name": "L_CONTAINER_PANE",
+            "menuid": "containermenu",
+            "items": [
+                "select-container",
+                "merge-container",
+                "split-container",
+                "delete-container"
+            ]
+        },
+        [
+            "accept-change",
+            "reject-change"
+        ],
+        [
+            {
+                "name": "L_ANNOTATION_PANE",
+                "menuid": "annotationmenu",
+                "items": [
+                    "insert-annotation-dialog",
+                    "edit-annotation-dialog",
+                    "remove-annotation"
+                ]
+            }
+        ],
+        [
+            "image-properties-dialog"
+        ],
+        [
+            "hyperlink-properties-dialog",
+            "remove-hyperlink"
+        ],
+        [
+            "edit-mathml-dialog"
+        ],
+        [
+            "remove-bookmark"
+        ],
+        [
+            "shape-properties-dialog"
+        ],
+        [
+            "list-properties-dialog"
+        ]
+    ]
+}

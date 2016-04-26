@@ -1,0 +1,78 @@
+{
+    "draw-shape-brush": {
+        "title": "L_DRAW_SHAPE_BRUSH",
+        "iconText": "L_DRAW_SHAPE_BRUSH_TEXT",
+        "ignoreReadOnly": false,
+        "parent": "insert-shape-freehand",
+        "iconUrl": "extensions/icons/draw-shape-brush.png"
+    },
+    "new-document": {
+        "title": "L_NEW_DOCUMENT",
+        "iconText": "L_NEW_DOCUMENT_TEXT"
+    },
+    "source-view-dialog": {
+        "title": "L_SOURCE_VIEW",
+        "iconText": "L_SOURCE_VIEW_TEXT",
+        "iconUrl": "extensions/icons/source-view-dialog.png"
+    },
+    "template-set-float-default": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_CONTAINER_FLOAT_DEFAULT",
+        "iconText": "L_STYLE_TEMPLATE_CONTAINER_FLOAT_DEFAULT",
+        "iconUrl": "extensions/icons/set-float-default.png"
+    },
+    "template-set-float-left": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_CONTAINER_FLOAT_LEFT",
+        "iconText": "L_STYLE_TEMPLATE_CONTAINER_FLOAT_LEFT",
+        "iconUrl": "extensions/icons/set-float-left.png"
+    },
+    "template-set-float-right": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_CONTAINER_FLOAT_RIGHT",
+        "iconText": "L_STYLE_TEMPLATE_CONTAINER_FLOAT_RIGHT",
+        "iconUrl": "extensions/icons/set-float-right.png"
+    },
+    "template-set-mirrored-default": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_MIRROR_DEFAULT",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_MIRROR_DEFAULT",
+        "iconUrl": "extensions/icons/set-mirrored-default.png"
+    },
+    "template-set-mirrored-horizontal": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_MIRROR_HORIZONTAL",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_MIRROR_HORIZONTAL",
+        "iconUrl": "extensions/icons/set-mirrored-horizontal.png"
+    },
+    "template-set-mirrored-vertical": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_MIRROR_VERTICAL",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_MIRROR_VERTICAL",
+        "iconUrl": "extensions/icons/set-mirrored-vertical.png"
+    },
+    "template-set-mirrored-both": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_MIRROR_BOTH",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_MIRROR_BOTH",
+        "iconUrl": "extensions/icons/set-mirrored-both.png"
+    },
+    "template-set-float-default-image": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_FLOAT_DEFAULT",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_FLOAT_DEFAULT",
+        "iconUrl": "extensions/icons/set-float-default.png"
+    },
+    "template-set-float-left-image": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_FLOAT_LEFT",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_FLOAT_LEFT",
+        "iconUrl": "extensions/icons/set-float-left.png"
+    },
+    "template-set-float-right-image": {
+        "type"    : "server",
+        "title"   : "L_STYLE_TEMPLATE_IMAGE_FLOAT_RIGHT",
+        "iconText": "L_STYLE_TEMPLATE_IMAGE_FLOAT_RIGHT",
+        "iconUrl": "extensions/icons/set-float-right.png"
+    }
+}

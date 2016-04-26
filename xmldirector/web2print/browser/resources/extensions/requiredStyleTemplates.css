@@ -1,0 +1,219 @@
+/*****************************
+ * Element: List
+ *****************************/
+
+/* Style Templates */
+
+:not(*){ 
+    -ro-style-template: default list; 
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM"; 
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-default";
+} 
+
+ul {
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_DISC" list; /* &#x2022; */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-disc";
+}
+ul.square { 
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_SQUARE" list; /* &#x25a0; */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-square";
+}
+ul.checked { 
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_CHECKED" list; /* &#x2713; */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-checked";
+}
+
+ol {
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_DECIMAL" list; /* 1., 2., 3. */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-decimal";
+}
+
+ol.upperRoman {
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_UPPER_ROMAN" list; /* I., II., III. */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-upper-roman";
+}
+
+ol.upperAlpha {
+    -ro-style-template: "L_STYLE_TEMPLATE_LIST_UPPER_ALPHA" list; /* A., B., C. */
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_LIST_ITEM";
+    -ro-style-template-context: "ro-text-context";
+    -ro-style-template-setter-id: "template-list-upper-alpha";
+}
+
+/* Style for Style Templates*/
+
+ul {
+    list-style-type: disc; 
+}
+ul.square { 
+    list-style-type: square; 
+}
+ul.checked { 
+    list-style-type: check;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ol.upperRoman {
+    list-style-type: upper-roman;
+}
+
+ol.upperAlpha {
+    list-style-type: upper-alpha;
+}
+
+
+/*****************************
+ * Element: Container 
+ *****************************/
+
+/* Style Templates */
+
+:not(*){
+    -ro-style-template: default container;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_CONTAINER_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-default";
+    -ro-style-template-context: "ro-container-context";
+}
+
+div.float_left {
+    -ro-style-template: "L_STYLE_TEMPLATE_CONTAINER_FLOAT_LEFT" container;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_CONTAINER_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-left";
+    -ro-style-template-context: "ro-container-context";
+}
+
+div.float_right {
+    -ro-style-template: "L_STYLE_TEMPLATE_CONTAINER_FLOAT_RIGHT" container;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_CONTAINER_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-right";
+    -ro-style-template-context: "ro-container-context";
+}
+
+/* Style for Style Templates */
+
+div.float_left, div.float_right {
+    width: 33.3% !important;
+    margin-top: 0em !important;
+}
+
+div.float_left {
+    float: left;
+    margin-left: -2px !important;
+    margin-right: 0.25cm !important;
+    margin-bottom: 0.25cm !important;
+}
+
+div.float_right {
+    float: right;
+    margin-left: 0.25cm !important;
+    margin-right: -2px !important;
+    margin-bottom: 0.25cm !important;
+}
+
+/* image-content related styles */
+
+div.float_left img, div.float_right img{
+    max-width: 100%;
+}
+
+
+/*****************************
+ * Element: Images 
+ *****************************/
+
+/* * * * * * * * * * * * * * *
+ * Mirroring
+ * * * * * * * * * * * * * * */
+
+/* Style Templates */
+
+:not(*) {
+    -ro-style-template: default inline-element; 
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED"; 
+    -ro-style-template-setter-id: "template-set-mirrored-default";
+    
+}
+
+img.mirrored_horizontal {
+    -ro-style-template: "L_STYLE_TEMPLATE_IMAGE_MIRROR_HORIZONTAL" inline-element; 
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED"; 
+    -ro-style-template-setter-id: "template-set-mirrored-horizontal";
+    
+}
+
+img.mirrored_vertical {
+    -ro-style-template: "L_STYLE_TEMPLATE_IMAGE_MIRROR_VERTICAL" inline-element;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED";
+    -ro-style-template-setter-id: "template-set-mirrored-vertical";
+}
+
+img.mirrored_both {
+    -ro-style-template: "L_STYLE_TEMPLATE_IMAGE_MIRROR_BOTH" inline-element;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_MIRRORED";
+    -ro-style-template-setter-id: "template-set-mirrored-both";
+}
+
+:not(*){
+    -ro-style-template: default inline-element;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-default-image";
+}
+
+img.float_left {
+    -ro-style-template: "L_STYLE_TEMPLATE_IMAGE_FLOAT_LEFT" inline-element;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-left-image";
+}
+
+img.float_right {
+    -ro-style-template: "L_STYLE_TEMPLATE_IMAGE_FLOAT_RIGHT" inline-element;
+    -ro-style-template-group: "L_STYLE_TEMPLATE_GROUP_IMAGE_FLOATED";
+    -ro-style-template-setter-id: "template-set-float-right-image";
+}
+
+/* Style for Style Templates */
+
+img.mirrored_horizontal {
+    -ro-transform: scaleX(-1);
+    
+}
+
+img.mirrored_vertical {
+    -ro-transform: scaleY(-1)
+}
+
+img.mirrored_both {
+    -ro-transform: scaleX(-1) scaleY(-1)
+}
+
+img.float_left, img.float_right {
+    margin-top: 0em !important;
+}
+
+img.float_left {
+    float: left;
+    margin-left: 0 !important;
+    margin-right: 0.25cm !important;
+    margin-bottom: 0.25cm !important;
+}
+
+img.float_right {
+    float: right;
+    margin-left: 0.25cm !important;
+    margin-right: 0 !important;
+    margin-bottom: 0.25cm !important;
+}
