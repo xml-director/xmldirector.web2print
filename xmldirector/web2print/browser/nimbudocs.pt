@@ -11,7 +11,7 @@
         <!-- This script is found on the nimbudocs server. An absolute URL to the script should be used. -->
         <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
         <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
-        <script type="text/javascript" tal:content="string:CONTENT_URL = '${python: context.absolute_url() + '/@@view/' + request.get('template')}'"></script>
+        <script type="text/javascript" tal:content="string:CONTENT_URL = '${python: context.absolute_url() + '/@@raw/' + request.get('template')}'"></script>
         <script type="text/javascript" tal:content="string:PREFIX = PORTAL_URL + '/++resource++xmldirector.web2print'"></script>
         <script>
             document.onreadystatechange = function () {
