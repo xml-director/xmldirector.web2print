@@ -4,7 +4,7 @@
    i18n:domain="xmldirector.plonecore" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Actions -->
-  <action title="C-REX" action_id="web2print" category="object" condition_expr=""
+  <action title="Web2Print" action_id="web2print" category="object" condition_expr=""
     url_expr="string:${object_url}/xmldirector-web2print" visible="True">
     <permission value="Modify portal content" />
   </action>
