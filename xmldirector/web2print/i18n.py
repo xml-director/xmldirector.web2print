@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# onkopedia.web2print
+# xmldirector.web2print
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 

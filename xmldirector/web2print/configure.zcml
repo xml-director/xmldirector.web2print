@@ -16,9 +16,9 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="xmldirector.crex"
         directory="profiles/default"
-        description="C-Rex integration with Plone"
+        title ="XML Director Web2Print"
+        description="XML Director Web2Print"
         provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 

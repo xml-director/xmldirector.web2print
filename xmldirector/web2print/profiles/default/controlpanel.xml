@@ -6,7 +6,7 @@
     purge="False">
 
     <configlet
-        title="XML-Director C-Rex Settings"
+        title="XML-Director Web2Print"
         action_id="xmldirector.web2print"
         appId="xmldirector.web2print"
         category="Products"

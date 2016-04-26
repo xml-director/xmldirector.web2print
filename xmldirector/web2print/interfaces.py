@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# onkopedia.web2print
+# xmldirector.web2print
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 
@@ -15,35 +15,10 @@ class IBrowserLayer(Interface):
 
 
 class IWeb2PrintSettings(Interface):
-    """ C-Rex settings """
+    """ Web2Print settings """
 
-    web2print_conversion_url = schema.TextLine(
-        title=_(u'URL for C-REX conversion webservice'),
-        description=_(u'URL for C-REX conversion webservice'),
-        default=u'https://c-rex.net/api/XBot/Convert/DGHO/docxMigration'
-    )
-
-    web2print_conversion_username = schema.TextLine(
-        title=_(u'Username for C-REX conversion webservice'),
-        description=_(u'Username for C-REX conversion webservice'),
-        default=u''
-    )
-
-    web2print_conversion_password = schema.TextLine(
-        title=_(u'Password for C-REX conversion webservice'),
-        description=_(u'Password for C-REX conversion webservice'),
-        default=u''
-    )
-
-    web2print_conversion_token = schema.TextLine(
-        title=_(u'C-REX Conversion Token'),
-        description=_(u'C-REX Conversion Token'),
-        default=u'',
-        required=False
-    )
-
-    web2print_conversion_token_last_fetched = schema.Datetime(
-        title=_(u'DateTime C-Rex conversion toked fetched'),
-        description=_(u'DateTime C-Rex conversion toked fetched'),
-        required=False
-    )
+#    web2print_conversion_url = schema.TextLine(
+#        title=_(u'URL for C-REX conversion webservice'),
+#        description=_(u'URL for C-REX conversion webservice'),
+#        default=u'https://c-rex.net/api/XBot/Convert/DGHO/docxMigration'
+#    )
