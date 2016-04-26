@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="xmldirector.plonecore.connector"
+   meta_type="Dexterity FTI"
+   i18n:domain="xmldirector.plonecore" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+  <!-- Actions -->
+  <action title="C-REX" action_id="crex" category="object" condition_expr=""
+    url_expr="string:${object_url}/xmldirector-crex" visible="True">
+    <permission value="Modify portal content" />
+  </action>
+</object>

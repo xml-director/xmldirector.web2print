@@ -1,0 +1,92 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:pp="http://namespaces.zopyx.com/pp"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+    <browser:page
+        name="xmldirector-crex"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".view.CREX"
+        template="crex.pt"
+        permission="cmf.ModifyPortalContent"
+    />
+
+    <browser:page
+        name="crex-upload-source"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".view.CREX"
+        attribute="upload_source"
+        permission="cmf.ModifyPortalContent"
+    />
+
+    <browser:page
+        name="crex-cleanup"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".view.CREX"
+        attribute="cleanup_generated_files"
+        permission="cmf.ModifyPortalContent"
+    />
+    
+    <browser:page
+        name="crex-cleanup-sources"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".view.CREX"
+        attribute="cleanup_source_files"
+        permission="cmf.ModifyPortalContent"
+    />
+
+    <browser:page
+        name="crex-convert"
+        for="xmldirector.plonecore.connector.IConnector"
+        class=".view.CREX"
+        attribute="convert"
+        permission="cmf.ModifyPortalContent"
+    />
+
+    <browser:page
+        name="xmldirector-test"
+        for="*"
+        class=".queue.Queue"
+        attribute="queue"
+        permission="cmf.ManagePortal"
+    />
+
+    <browser:page
+        name="xmldirector-crex-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.CRexSettingsControlPanel"
+        permission="cmf.ManagePortal"
+    />
+
+    <include package="plone.rest" file="configure.zcml" />
+
+    <plone:service
+      method="POST"
+        permission="cmf.ModifyPortalContent"
+        for="xmldirector.plonecore.connector.IConnector"
+        factory=".restapi.api_convert"
+        name="xmldirector-convert"
+    />
+
+    <plone:service
+      method="POST"
+        permission="cmf.ModifyPortalContent"
+        for="xmldirector.plonecore.connector.IConnector"
+        factory=".restapi.api_convert_async"
+        name="xmldirector-convert-async"
+    />
+
+    <plone:service
+        method="GET"
+        permission="zope2.View"
+        for="xmldirector.plonecore.connector.IConnector"
+        factory=".restapi.api_convert_status"
+        name="xmldirector-convert-status"
+    />
+
+</configure>

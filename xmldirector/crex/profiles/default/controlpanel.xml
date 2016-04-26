@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="xmldirector.crex"
+    purge="False">
+
+    <configlet
+        title="XML-Director C-Rex Settings"
+        action_id="xmldirector.crex"
+        appId="xmldirector.crex"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@xmldirector-crex-settings"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

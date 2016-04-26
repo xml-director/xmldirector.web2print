@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="xmldirector.plonecore">
+<body>
+
+
+<metal:main fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+
+        <style type="text/css">
+            div.row {
+                margin-bottom: 1em;
+            }
+            div.row label {
+                display: inline-block;
+                width: 100px;
+            }
+            div.row label.format {
+                width: 40px;
+                display: inline;
+                margin-right: 1em;
+            }
+            div.row input[type="submit"] {
+                padding: 0.5em;
+                font-weight: bold;
+            }
+            div.row input[type="text"] {
+                width: 500px !important;
+            }
+
+            legend {
+                font-size: 1.4em !important;
+                font-weight: bold;
+            }
+
+            img.preview {
+                max-width: 150px;
+            } 
+
+
+            .left {
+                float: left;
+                width: 50%;
+            }
+
+            .right {
+                float: right;
+                width: 40%;
+                padding-left: 1em;
+                padding-top: 1em;
+           }
+
+           .clear {
+               clear: both;
+               margin-bottom: 2em;
+           }
+
+
+
+        </style>
+
+        <h2 i18n:translate="">C-REX</h2>
+
+        <form method="post" class="left" tal:attributes="action string:${context/absolute_url}/crex-upload-source" enctype="multipart/form-data">
+            <fieldset>
+                <legend i18n:translate="">Source document upload (DOCX)</legend>
+                <div class="row">
+                    <input type="file" name="source" size="60"/>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Upload" i18n:attributes="value"/>
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="right">
+            <label i18n:translate="">Source files</label>
+            <a tal:attributes="href string:${context/absolute_url}/@@crex-cleanup-sources"
+                i18n:translate="">
+                Cleanup source files
+            </a>
+            <ul>
+                <li tal:repeat="name view/get_source_files">
+                    <a tal:content="name"
+                        tal:attributes="href string:${context/absolute_url}/@@view/$name"/>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+
+
+        <form method="post" class="left" tal:attributes="action string:${context/absolute_url}/crex-convert">
+            <fieldset>
+                <legend i18n:translate="">Convert to XML using c-rex.net service</legend>
+                <div class="row" tal:define="endpoints view/get_endpoints">
+                    <tal:loop repeat="key endpoints">
+                        <input type="radio" name="endpoint" tal:attributes="value key; checked python: 'checked' if repeat['key'].index == 0else '' "/>
+                        <label class="format" tal:content="python: endpoints[key]['title']" />
+                        <br/>
+                    </tal:loop>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Convert" i18n:attributes="value"/>
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="right">
+            <label i18n:translate="">Generated files</label>
+            <a tal:attributes="href string:${context/absolute_url}/@@crex-cleanup"
+                i18n:translate="">
+                Cleanup generated files
+            </a>
+            <ul>
+                <li tal:repeat="name view/get_generated_files">
+                    <a tal:content="name"
+                        tal:attributes="href string:${context/absolute_url}/@@view/$name"/>
+                </li>
+            </ul>
+        </div>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+
