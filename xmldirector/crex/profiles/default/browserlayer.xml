@@ -1,4 +1,0 @@
-<layers>
-    <layer name="xmldirector.crex"
-        interface="xmldirector.crex.interfaces.IBrowserLayer" />
-</layers>

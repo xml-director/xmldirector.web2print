@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# xmldirector.crex
+# xmldirector.web2print
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# xmldirector.crex
+# xmldirector.web2print
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 
@@ -22,9 +22,9 @@ from zope.annotation.interfaces import IAnnotations
 from Products.CMFCore import permissions
 from ZPublisher.Iterators import filestream_iterator
 
-from xmldirector.crex.logger import LOG
-from xmldirector.crex.interfaces import ICRexSettings
-from xmldirector.crex.browser.rewriterules import RuleRewriter
+from xmldirector.web2print.logger import LOG
+from xmldirector.web2print.interfaces import IWeb2PrintSettings
+from xmldirector.web2print.browser.rewriterules import RuleRewriter
 from zopyx.plone.persistentlogger.logger import IPersistentLogger
 
 from xmldirector.plonecore.browser.restapi import temp_zip
@@ -36,7 +36,7 @@ from xmldirector.plonecore.browser.restapi import decode_json_payload
 from collective.taskqueue import taskqueue
 
 
-ANNOTATION_CREX_INFO_KEY = 'xmldirector.plonecore.crex.queue'
+ANNOTATION_CREX_INFO_KEY = 'xmldirector.plonecore.web2print.queue'
 
 CREX_STATUS_PENDING = u'pending'
 CREX_STATUS_RUNNING = u'running'
@@ -56,63 +56,63 @@ ENDPOINTS['docx2ditamap'] = \
              title=u'DOCX to DITA map')
 
 
-class CRexConversionError(Exception):
+class Web2PrintConversionError(Exception):
     """ A generic C-Rex error """
 
 
-def convert_crex(zip_path, crex_url=None, crex_username=None, crex_password=None):
+def convert_web2print(zip_path, web2print_url=None, web2print_username=None, web2print_password=None):
     """ Send ZIP archive with content to be converted to C-Rex.
         Returns name of ZIP file with converted resources.
     """
 
     ts = time.time()
     registry = getUtility(IRegistry)
-    settings = registry.forInterface(ICRexSettings)
+    settings = registry.forInterface(IWeb2PrintSettings)
 
-    crex_conversion_url = crex_url or settings.crex_conversion_url
-    crex_conversion_username = crex_username or settings.crex_conversion_username
-    crex_conversion_password = crex_password or settings.crex_conversion_password
-    crex_token = settings.crex_conversion_token
+    web2print_conversion_url = web2print_url or settings.web2print_conversion_url
+    web2print_conversion_username = web2print_username or settings.web2print_conversion_username
+    web2print_conversion_password = web2print_password or settings.web2print_conversion_password
+    web2print_token = settings.web2print_conversion_token
 
     # Fetch authentication token if necessary (older than one hour)
-    crex_token_last_fetched = settings.crex_conversion_token_last_fetched or datetime.datetime(
+    web2print_token_last_fetched = settings.web2print_conversion_token_last_fetched or datetime.datetime(
         2000, 1, 1)
-    diff = datetime.datetime.utcnow() - crex_token_last_fetched
+    diff = datetime.datetime.utcnow() - web2print_token_last_fetched
 
-    if not crex_token or diff.total_seconds() > 3600:
-        f = furl.furl(crex_conversion_url)
+    if not web2print_token or diff.total_seconds() > 3600:
+        f = furl.furl(web2print_conversion_url)
         token_url = '{}://{}/api/Token'.format(
-            f.scheme, f.host, crex_conversion_url)
+            f.scheme, f.host, web2print_conversion_url)
         headers = {'content-type': 'application/x-www-form-urlencoded'}
         params = dict(
-            username=crex_conversion_username,
-            password=crex_conversion_password,
+            username=web2print_conversion_username,
+            password=web2print_conversion_password,
             grant_type='password')
         result = requests.post(token_url, data=params, headers=headers)
         if result.status_code != 200:
             msg = u'Error retrieving DOCX conversion token from webservice (HTTP code {}, Message {})'.format(
                 result.status_code, result.text)
             LOG.error(msg)
-            raise CRexConversionError(msg)
+            raise Web2PrintConversionError(msg)
         data = result.json()
-        crex_token = data['access_token']
-        settings.crex_conversion_token = crex_token
-        settings.crex_conversion_token_last_fetched = datetime.datetime.utcnow()
+        web2print_token = data['access_token']
+        settings.web2print_conversion_token = web2print_token
+        settings.web2print_conversion_token_last_fetched = datetime.datetime.utcnow()
         LOG.info('Fetching new DOCX authentication token - successful')
     else:
         LOG.info('Fetching DOCX authentication token from Plone cache')
 
-    headers = {'authorization': 'Bearer {}'.format(crex_token)}
+    headers = {'authorization': 'Bearer {}'.format(web2print_token)}
 
     with open(zip_path, 'rb') as fp:
         try:
             LOG.info(u'Starting C-Rex conversion of {}, size {} '.format(zip_path,
                                                                          os.path.getsize(zip_path)))
             result = requests.post(
-                crex_conversion_url, files=dict(source=fp), headers=headers)
+                web2print_conversion_url, files=dict(source=fp), headers=headers)
         except requests.ConnectionError:
             msg = u'Connection to C-REX webservice failed'
-            raise CRexConversionError(msg)
+            raise Web2PrintConversionError(msg)
 
         if result.status_code == 200:
             msg = u'Conversion successful (HTTP code {}, duration: {:2.1f} seconds))'.format(
@@ -126,23 +126,23 @@ def convert_crex(zip_path, crex_url=None, crex_username=None, crex_password=None
         else:
             # Forbidden -> invalid token -> invalidate token stored in Plone
             if result.status_code == 401:
-                settings.crex_conversion_token = u''
-                settings.crex_conversion_token_last_fetched = datetime.datetime(
+                settings.web2print_conversion_token = u''
+                settings.web2print_conversion_token_last_fetched = datetime.datetime(
                     1999, 1, 1)
             msg = u'Conversion failed (HTTP code {}, message {})'.format(
                 result.status_code, result.text)
             LOG.error(msg)
-            raise CRexConversionError(msg)
+            raise Web2PrintConversionError(msg)
 
 
 class BaseService(BaseService):
     """ Base class for REST services """
 
-    def get_crex_info(self):
+    def get_web2print_info(self):
         annotations = IAnnotations(self.context)
         return annotations.get(ANNOTATION_CREX_INFO_KEY, {})
 
-    def set_crex_info(self, info):
+    def set_web2print_info(self, info):
         annotations = IAnnotations(self.context)
         annotations[ANNOTATION_CREX_INFO_KEY] = info
 
@@ -151,11 +151,11 @@ class api_convert(BaseService):
 
     def _render(self):
 
-        conversion_info = self.get_crex_info()
+        conversion_info = self.get_web2print_info()
         conversion_info['status'] = CREX_STATUS_RUNNING
         conversion_info[
             'running_since'] = datetime.datetime.utcnow().isoformat()
-        self.set_crex_info(conversion_info)
+        self.set_web2print_info(conversion_info)
         transaction.commit()
 
         try:
@@ -163,7 +163,7 @@ class api_convert(BaseService):
             conversion_info['status'] = CREX_STATUS_SUCCESS
             conversion_info[
                 'terminated'] = datetime.datetime.utcnow().isoformat()
-            self.set_crex_info(conversion_info)
+            self.set_web2print_info(conversion_info)
             return result
         except Exception as e:
             LOG.error(e, exc_info=True)
@@ -171,7 +171,7 @@ class api_convert(BaseService):
             conversion_info[
                 'terminated'] = datetime.datetime.utcnow().isoformat()
             conversion_info['error'] = str(e)
-            self.set_crex_info(conversion_info)
+            self.set_web2print_info(conversion_info)
             transaction.commit()
             raise
 
@@ -202,12 +202,12 @@ class api_convert(BaseService):
 
         
         with delete_after(zip_tmp):
-            zip_out = convert_crex(zip_tmp, crex_url=conversion_endpoint_url)
+            zip_out = convert_web2print(zip_tmp, web2print_url=conversion_endpoint_url)
         store_zip(self.context, zip_out, 'current')
 
-        conversion_info = self.get_crex_info()
+        conversion_info = self.get_web2print_info()
         conversion_info['status'] = CREX_STATUS_SUCCESS
-        self.set_crex_info(conversion_info)
+        self.set_web2print_info(conversion_info)
 
         with delete_after(zip_out):
             self.request.response.setHeader(
@@ -222,7 +222,7 @@ class api_convert_async(BaseService):
 
     def _render(self):
 
-        conversion_information = self.get_crex_info()
+        conversion_information = self.get_web2print_info()
         status = conversion_information.get('status')
         if not status or status in (CREX_STATUS_ERROR, CREX_STATUS_SUCCESS):
             task_id = taskqueue.add(
@@ -237,7 +237,7 @@ class api_convert_async(BaseService):
                     'created': datetime.datetime.utcnow().isoformat(),
                     'creator': plone.api.user.get_current().getUserName(),
                     'status': u'spooled'}
-            self.set_crex_info(data)
+            self.set_web2print_info(data)
             return data
         else:
             self.request.response.setStatus(409)  # Conflict
@@ -250,4 +250,4 @@ class api_convert_status(BaseService):
 
     def _render(self):
 
-        return self.get_crex_info()
+        return self.get_web2print_info()

@@ -1,0 +1,4 @@
+<layers>
+    <layer name="xmldirector.web2print"
+        interface="xmldirector.web2print.interfaces.IBrowserLayer" />
+</layers>

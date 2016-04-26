@@ -11,10 +11,10 @@ import tempfile
 
 from Products.Five.browser import BrowserView
 
-from xmldirector.crex.browser.restapi import delete_after
-from xmldirector.crex.browser.restapi import convert_crex
-from xmldirector.crex.browser.restapi import store_zip
-from xmldirector.crex.browser.restapi import ENDPOINTS
+from xmldirector.web2print.browser.restapi import delete_after
+from xmldirector.web2print.browser.restapi import convert_web2print
+from xmldirector.web2print.browser.restapi import store_zip
+from xmldirector.web2print.browser.restapi import ENDPOINTS
 
 
 class CREX(BrowserView):
@@ -39,7 +39,7 @@ class CREX(BrowserView):
             fp.write(source.read())
 
         self.context.plone_utils.addPortalMessage(u'Upload completed')
-        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-crex')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 
     def get_source_files(self):
         handle = self.context.get_handle()
@@ -58,7 +58,7 @@ class CREX(BrowserView):
         if handle.exists('result'):
             handle.removedir('result', force=True, recursive=True)
         self.context.plone_utils.addPortalMessage(u'Generated files removed')
-        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-crex')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 
     def cleanup_source_files(self):
         handle = self.context.get_handle()
@@ -67,7 +67,7 @@ class CREX(BrowserView):
                 if name.endswith('.docx'):
                     handle.remove('src/{}'.format(name))
         self.context.plone_utils.addPortalMessage(u'Source files removed')
-        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-crex')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 
     def get_endpoints(self):
         return ENDPOINTS
@@ -87,10 +87,10 @@ class CREX(BrowserView):
                 fp_out.write(handle.open('src/index.docx', 'rb').read())
 
         with delete_after(zip_tmp):
-            zip_out = convert_crex(zip_tmp, crex_url=endpoint_url)
+            zip_out = convert_web2print(zip_tmp, web2print_url=endpoint_url)
 
         store_zip(self.context, zip_out, 'result')
 
         self.context.plone_utils.addPortalMessage(u'Conversion completed')
-        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-crex')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 

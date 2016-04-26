@@ -2,16 +2,16 @@
 <object
     name="portal_controlpanel"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="xmldirector.crex"
+    i18n:domain="xmldirector.web2print"
     purge="False">
 
     <configlet
         title="XML-Director C-Rex Settings"
-        action_id="xmldirector.crex"
-        appId="xmldirector.crex"
+        action_id="xmldirector.web2print"
+        appId="xmldirector.web2print"
         category="Products"
         condition_expr=""
-        url_expr="string:${portal_url}/@@xmldirector-crex-settings"
+        url_expr="string:${portal_url}/@@xmldirector-web2print-settings"
         visible="True"
         i18n:attributes="title">
             <permission>Manage portal</permission>

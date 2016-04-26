@@ -59,7 +59,7 @@
     <browser:page
         name="xmldirector-crex-settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".controlpanel.CRexSettingsControlPanel"
+        class=".controlpanel.Web2PrintSettingsControlPanel"
         permission="cmf.ManagePortal"
     />
 

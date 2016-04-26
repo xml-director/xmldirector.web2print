@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 version = '0.2.1'
 
-setup(name='xmldirector.crex',
+setup(name='xmldirector.web2print',
       version=version,
       description="Plone/XML-Director integration with c-rex.net",
       long_description=open(os.path.join("docs", "source", "README.rst")).read() + "\n" +
@@ -21,7 +21,7 @@ setup(name='xmldirector.crex',
       keywords='xml-director DOCX XML C-Rex Plone Python ',
       author='Andreas Jung',
       author_email='info@zopyx.com',
-      url='http://pypi.python.org/pypi/xmldirector.crex',
+      url='http://pypi.python.org/pypi/xmldirector.web2print',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['xmldirector'],
@@ -29,13 +29,9 @@ setup(name='xmldirector.crex',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'zopyx.plone.persistentlogger',
-          'furl',
-          'plone.rest',
-          'collective.taskqueue',
           'plone.app.testing',
           'xmldirector.plonecore',
-          'requests',
+          'pp.client-plone',
       ],
       tests_require=['zope.testing'],
       entry_points="""

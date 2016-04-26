@@ -1,4 +1,4 @@
-xmldirector.crex
+xmldirector.web2print
 ================
 
 Integration of XML-Director with C-Rex.
@@ -10,4 +10,4 @@ Integration of XML-Director with C-Rex.
 Documentation
 -------------
 
-- https://pythonhosted.org/xmldirector.crex/
+- https://pythonhosted.org/xmldirector.web2print/

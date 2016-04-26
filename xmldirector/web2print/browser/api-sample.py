@@ -81,7 +81,7 @@ print (url)
 
 print '-' * 80
 print 'UPLOAD DOCX'
-force_files = dict(zipfile=open('crex.zip', 'rb'))
+force_files = dict(zipfile=open('web2print.zip', 'rb'))
 print url
 result = send_request('POST', 'xmldirector-store-zip',
                       force_files=force_files, url=url, no_json=True)

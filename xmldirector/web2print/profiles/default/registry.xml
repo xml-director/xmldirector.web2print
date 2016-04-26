@@ -2,5 +2,5 @@
 <registry 
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plone">
-    <records interface="xmldirector.crex.interfaces.ICRexSettings" />
+    <records interface="xmldirector.web2print.interfaces.IWeb2PrintSettings" />
 </registry>
