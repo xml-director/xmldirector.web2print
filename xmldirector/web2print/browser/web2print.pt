@@ -35,7 +35,7 @@
             <legend i18n:translate="">Data entry</legend>
 
             <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print-nimbudocs?template=${request/template}">
-                <button>Open template in WYSIWYG editor</button>
+                <button class="context">Open template in WYSIWYG editor</button>
             </a>
             <form method="post" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
 
