@@ -37,7 +37,8 @@
             }
 
             .preview-image.selected {
-                border: 4px solid green;
+                border: 6px solid green;
+                border-radius: 20px;
             }
 
             fieldset#form {
