@@ -27,6 +27,7 @@
             .preview {
                 float: left;
                 margin-right: 50px;
+                text-align: center;
             }
 
             .preview-image {
@@ -113,7 +114,7 @@
             </a>
         </fieldset>
 
-        <div style="clear"></div>
+        <div style="clear: both"></div>
 
         <fieldset tal:condition="request/output_url | nothing">
             <legend i18n:translate="">Generated PDF</legend>
