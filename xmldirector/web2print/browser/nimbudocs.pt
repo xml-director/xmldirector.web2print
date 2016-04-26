@@ -9,6 +9,7 @@
         <title>Nimbudocs Editor minimum integration</title>
         
         <!-- This script is found on the nimbudocs server. An absolute URL to the script should be used. -->
+        <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
         <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
         <script type="text/javascript" tal:content="string:CONTENT_URL = '${python: context.absolute_url() + '/@@raw/' + request.get('template')}'"></script>
@@ -29,8 +30,17 @@
                     userAgentStylesFromUrl: PREFIX + "extensions/requiredStyleTemplates.css",
                     onready: function() {
                         editor = this;
-                        editor.loadDocumentFromUrl(CONTENT_URL);
-                        editor.invokeAction('zoom-mode-window-height-client');
+                        $.get(CONTENT_URL).
+                        done(function(data) {
+                            editor.loadDocument(data, CONTENT_URL);
+                            editor.invokeAction('zoom-mode-window-height-client');
+                        }).error(function() {
+                            alert(CONTENT_URL + ' could not be loaded!')
+                        });
+                        /*
+                            editor.loadDocumentFromUrl(CONTENT_URL);
+                            editor.invokeAction('zoom-mode-window-height-client');
+                        */
                     },
                     onnotsupported: function() {
                         alert("This browser does not meet the requirements of Nimbudocs Editor.");
