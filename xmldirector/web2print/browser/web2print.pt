@@ -31,7 +31,7 @@
             }
 
             .preview-image {
-                max-width: 100px;
+                max-width: 135px;
                 border: 2px solid grey;
                 padding: 3px;
             }
