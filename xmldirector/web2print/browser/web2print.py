@@ -115,7 +115,7 @@ class Web2Print(BrowserView):
             node_placeholder = node.attrib.get('placeholder', node_id)
             node_required = not node.attrib.get('required', 'yes') == 'no'
             node_use_default = node.attrib.get('use_default', 'no') == 'yes'
-            node_text = node.text if node_use_default else u''
+            node_text = node.text.strip() if node_use_default else u''
             result.append(dict(
                 id=node_id,
                 required=node_required,

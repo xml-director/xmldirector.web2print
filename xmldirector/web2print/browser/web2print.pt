@@ -41,10 +41,12 @@
                 float: left;
                 margin-right: 50px;
                 text-align: center;
+                max-width: 140px;
             }
 
             .preview-image {
                 max-width: 135px;
+                max-height: 150px;
                 border: 2px solid grey;
                 padding: 3px;
             }
