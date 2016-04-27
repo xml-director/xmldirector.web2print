@@ -26,7 +26,7 @@
                                     "page-properties-dialog",
                                     "create-pdf-dialog",
                                     "print-dialog",
-                                    "source-view-dialog"
+                                    "save-and-close"
                                 ]
                             }
                         ]

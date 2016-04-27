@@ -10,18 +10,30 @@ function initCustomActions(editor){
         });
     }
     
-    // the brush tool
-    editor.addEventListener("draw-shape-brush", "actioninvoke", function(e) {
-        this.selectedState = true;
-        
-        var action = this;
-        
-        var properties = {
-            lineWidth: "15"
-        };
-        
-        editor.invokeAction("draw-shape-freehand", properties).then(function() {
-            action.selectedState = false;
+    editor.addEventListener("save-and-close", "actioninvoke", function(e) {
+
+        editor.fetchDocument().then(function(v) {
+            var html = v
+            var pdf_url = editor.getPdfUrl();
+            var context_url = $('base').attr('href');
+            var data = {html: html,
+                        pdf_url: pdf_url,
+                        template: TEMPLATE
+                       };
+
+            $('#message').text('Saving....');
+            $.ajax({
+                type: 'POST',
+                url: CONTEXT_URL + '/@@xmldirector-web2print-nimbudocs-set-content', 
+                data: data, 
+                success: function(return_url) {
+                    $('#message').text('Saved...returning to Web-to-Print application');
+                    window.location.href = return_url;
+                },
+                error: function() {
+                    $('#message').text('Error while saving....');
+                }
+            });
         });
     });
 }

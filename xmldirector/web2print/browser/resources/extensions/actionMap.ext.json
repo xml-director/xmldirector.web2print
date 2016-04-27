@@ -6,6 +6,13 @@
         "parent": "insert-shape-freehand",
         "iconUrl": "extensions/icons/draw-shape-brush.png"
     },
+    "save-and-close": {
+        "title": "L_DRAW_SHAPE_BRUSH",
+        "iconText": "L_DRAW_SHAPE_BRUSH_TEXT",
+        "ignoreReadOnly": false,
+        "parent": "insert-shape-freehand",
+        "iconUrl": "++resource++xmldirector.web2print/extensions/icons/draw-shape-brush.png"
+    },
     "new-document": {
         "title": "L_NEW_DOCUMENT",
         "iconText": "L_NEW_DOCUMENT_TEXT"

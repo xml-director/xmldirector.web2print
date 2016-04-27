@@ -138,6 +138,7 @@
         <div style="clear: both"></div>
 
         <tal:def define="pdf_files view/all_pdf_files">
+            <a name="pdf-files"/>
             <fieldset tal:condition="pdf_files">
                 <legend i18n:translate="">Generated PDF files</legend>
 

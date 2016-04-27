@@ -10,6 +10,7 @@ import os
 import furl
 import fs.path
 import datetime
+import requests
 import shutil
 import tempfile
 import hurry
@@ -55,7 +56,7 @@ class Web2Print(BrowserView):
                  title=name,
                  created=info.get('created_time'),
                  size=info.get('st_size')))
-        return sorted(result, key=lambda x: x.get('size', 0))
+        return sorted(result, key=lambda x: x.get('created', 0), reverse=True)
 
     def available_templates(self, template_dir='templates'):
         """ List all available templates """
@@ -189,3 +190,26 @@ class Web2Print(BrowserView):
         f.args = self.request.form
         f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
         self.request.response.redirect(str(f))
+
+    def nimbudocs_set_content(self, *args, **kw):
+
+        html = self.request['html']
+        pdf_url = self.request['pdf_url']
+        template = self.request['template']
+        handle = self.context.get_handle()
+
+        result = requests.get(pdf_url)
+        if result.status_code == 200:
+            output_filename = 'output/{}.pdf'.format(datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
+            with handle.open(output_filename, 'wb') as fp:
+                fp.write(result.content)
+
+            f = furl.furl('{}/@@xmldirector-web2print'.format(self.context.absolute_url()))
+            f.args['template'] = template
+            f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
+            f.add(fragment_path='pdf-files')
+            self.request.response.setStatus(200)                                               
+            return str(f)
+        else:
+            self.request.response.setStatus(500)
+

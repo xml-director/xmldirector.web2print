@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html tal:define="portal_url python: context.portal_url.getPortalObject().absolute_url()">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -11,17 +11,36 @@
         <!-- This script is found on the nimbudocs server. An absolute URL to the script should be used. -->
         <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
+        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/extensions/custom-actions.js"></script>
         <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
+        <script type="text/javascript" tal:content="string:TEMPLATE = '${request/template}'"></script>
+        <script type="text/javascript" tal:content="string:CONTEXT_URL = '${context/absolute_url}'"></script>
+        <script type="text/javascript" tal:content="string:WEB2PRINT_URL = '${context/absolute_url}/@@xmldirector-web2print'"></script>
         <script type="text/javascript" tal:content="string:CONTENT_URL = '${python: context.absolute_url() + '/@@raw/' + request.get('template')}'"></script>
         <script type="text/javascript" tal:content="string:PREFIX = PORTAL_URL + '/++resource++xmldirector.web2print'"></script>
         <script>
             document.onreadystatechange = function () {
-                if (document.readyState == "complete") {
+              if (document.readyState == "complete") {
+
+                    actions = null;                
+                    $.get({
+                        type: 'GET',
+                        async: false,
+                        url: PORTAL_URL + "/++resource++xmldirector.web2print/extensions/actionMap.ext.json"
+                    }).done(function(data) {
+                        console.log(data['save-and-close']);
+                        data['save-and-close']['iconUrl'] = PORTAL_URL + data['save-and-close']['iconUrl'];
+                        console.log(data['save-and-close']);
+
+                        actions = data;
+                    });
+
 
                 var options = {
                     collabUrl: "collab.html",
                     uiConfig:           PREFIX + "/extensions/uiconfig.json",
                     actionMapExtension: PREFIX + "/extensions/actionMap.ext.json",
+                    //                    actionMap: actions,
                     localeExtension: {
                         "en-US": PREFIX + "/extensions/en-US.ext.json",
                         "de-DE": PREFIX + "/extensions/de-DE.ext.json",
@@ -33,14 +52,11 @@
                         $.get(CONTENT_URL).
                         done(function(data) {
                             editor.loadDocument(data, CONTENT_URL);
+                            initCustomActions(editor);
                             editor.invokeAction('zoom-mode-window-height-client');
                         }).error(function() {
                             alert(CONTENT_URL + ' could not be loaded!')
                         });
-                        /*
-                            editor.loadDocumentFromUrl(CONTENT_URL);
-                            editor.invokeAction('zoom-mode-window-height-client');
-                        */
                     },
                     onnotsupported: function() {
                         alert("This browser does not meet the requirements of Nimbudocs Editor.");
