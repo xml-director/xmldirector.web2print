@@ -40,13 +40,12 @@ class Web2Print(BrowserView):
             if nodes:
                 title = nodes[0].text
 
+            image_id = fs.path.join(template_dir, os.path.splitext(name)[0] + '.png')
             result.append(dict(
                 id=fs.path.join(template_dir, name), 
                 title=title,
-                image_id=fs.path.join(template_dir, os.path.splitext(name)[0] + '.png')
-                
+                image_id=image_id))
         return result
-
 
     def parse_template(self, template=None):
 
@@ -60,14 +59,24 @@ class Web2Print(BrowserView):
 
         result = list()
         for node in root.xpath('//*[@editable="yes"]'):
+
             node_id = node.attrib.get('id')
             if not node_id:
-                raise ValueError(u'Missing id attribute in {}'.form(lxml.html.tostring(node)))
+                raise ValueError(u'Missing id attribute in {}'.format(lxml.html.tostring(node)))
+
             node_type = node.attrib.get('type', 'string')
+            if node_type not in ('string', 'text', 'email', 'float', 'integer'):
+                raise ValueError(u'Unknown type="{}" in {}'.format(node_type, lxml.html.tostring(node)))
+
             node_placeholder = node.attrib.get('placeholder', node_id)
+            node_required = not node.attrib.get('required', 'yes') == 'no'
+            node_use_default = node.attrib.get('use_default', 'no') == 'yes'
+            node_text = node.text if node_use_default else u''
             result.append(dict(
                 id=node_id,
+                required=node_required,
                 placeholder=node_placeholder,
+                text=node_text,
                 type=node_type))
         return result
 

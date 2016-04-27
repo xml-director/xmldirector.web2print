@@ -28,6 +28,15 @@
                 font-weight: bold;
             }
 
+            .form-row .required {
+                color: red;
+            }
+
+            .form-row textarea,
+            .form-row input {
+                display: block;
+            }
+
             .preview {
                 float: left;
                 margin-right: 50px;
@@ -77,19 +86,35 @@
 
                 <div class="form-row" tal:repeat="d view/parse_template">
                     <span class="label" i18n:translate="" tal:content="d/id/capitalize"/>
+                    <span class="required" i18n:translate="" tal:condition="d/required">*</span>
+
                     <input type="text"
-                           data-validation="required"
                            tal:condition="python: d['type'] == 'string'"
                            tal:attributes="placeholder d/placeholder;
+                                           data-validation python: 'required' if d['required'] else '';
                                            name d/id;
-                                           value python: request.form.get(d['id'], '')"
+                                           value python: request.form.get(d['id'], d['text'])"
+                    />
+                    <input type="email"
+                           tal:condition="python: d['type'] == 'email'"
+                           tal:attributes="placeholder d/placeholder;
+                                           data-validation python: 'required' if d['required'] else '';
+                                           name d/id;
+                                           value python: request.form.get(d['id'], d['text'])"
+                    />
+                    <input type="number"
+                           tal:condition="python: d['type'] == 'integer'"
+                           tal:attributes="placeholder d/placeholder;
+                                           data-validation python: 'required' if d['required'] else '';
+                                           name d/id;
+                                           value python: request.form.get(d['id'], d['text'])"
                     />
                     <textarea 
-                           data-validation="required"
                            tal:condition="python: d['type'] == 'text'"
                            tal:attributes="placeholder d/placeholder;
+                                           data-validation python: 'required' if d['required'] else '';
                                            name d/id"
-                           tal:content="python: request.form.get(d['id'], '')"
+                           tal:content="python: request.form.get(d['id'], d['text'])"
                     />
 
                 </div>
