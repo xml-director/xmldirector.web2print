@@ -63,6 +63,11 @@
                 float: right;
                 width: 45%;
             }
+
+            caption {
+                text-align: left;
+                font-weight: bold;
+            }
         </style>
 
         <fieldset id="templates">
@@ -78,7 +83,7 @@
         </fieldset>
 
         <fieldset id="form" tal:condition="request/template | nothing">
-            <legend i18n:translate="">PDF generation via PDFreactor from form data</legend>
+            <legend i18n:translate="">Form-based PDF generation</legend>
 
             <form method="post" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
 
@@ -124,7 +129,7 @@
         </fieldset>
 
         <fieldset id="nimbudocs" tal:condition="request/template | nothing">
-            <legend i18n:translate="">Edit with Nimbudocs WYSIWYG editor</legend>
+            <legend i18n:translate="">Edit with WYSIWYG editor</legend>
             <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print-nimbudocs?template=${request/template}">
                 <button class="context">Open in Nimbudocs editor</button>
             </a>
@@ -132,10 +137,40 @@
 
         <div style="clear: both"></div>
 
-        <fieldset tal:condition="request/output_url | nothing">
-            <legend i18n:translate="">Generated PDF</legend>
-            <a tal:attributes="href request/output_url" tal:content="request/output_url" />
-        </fieldset>
+        <tal:def define="pdf_files view/all_pdf_files">
+            <fieldset tal:condition="pdf_files">
+                <legend i18n:translate="">Generated PDF files</legend>
+
+                <div class="form-row" id="last-generated-pdf" tal:condition="request/output_url | nothing">
+                    <span class="label" i18n:translate="">Current PDF</span>:
+                    <a tal:attributes="href request/output_url" tal:content="request/output_url" />
+                </div>
+
+                <table id="pdf-files" class="listing" tal:condition="pdf_files">
+                    <caption i18n:translate="">All PDF files</caption>
+                    <thead>
+                        <th i18n:translate="">Filename</th>
+                        <th i18n:translate="">Created</th>
+                        <th i18n:translate="">Size</th>
+                    </thead>
+                    <tbody>
+                        <tr tal:repeat="pdf_file pdf_files">
+                            <td>
+                                <a tal:attributes="href pdf_file/url"
+                                   tal:content="pdf_file/title"
+                                />
+                            </td>
+                            <td tal:content="python: view.human_readable_datetime(pdf_file['created'])"/>
+                            <td tal:content="python: view.human_readable_filesize(pdf_file['size'])"/>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a tal:attributes="href string:${context/absolute_url}/@@xmldirector-web2print-cleanup-output">
+                    <button class="context" i18n:translate="">Cleanup output directory</button>
+                </a>
+            </fieldset>
+        </tal:def>
 
         <script type="text/javascript"> $.validate(); </script>
   </metal:content-core>

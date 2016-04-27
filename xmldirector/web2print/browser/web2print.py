@@ -12,6 +12,8 @@ import fs.path
 import datetime
 import shutil
 import tempfile
+import hurry
+import humanize
 import fs.path
 import lxml.html
 
@@ -24,6 +26,36 @@ from pp.client.python.pdf import pdf
 
 
 class Web2Print(BrowserView):
+
+    def human_readable_filesize(self, num_bytes):
+        """ Return num_bytes as human readable representation """
+        return hurry.filesize.size(num_bytes, hurry.filesize.alternative)
+
+    def human_readable_datetime(self, dt=None, to_utc=False):
+        """ Convert with `dt` datetime string into a human readable
+            representation using humanize module.
+        """
+        if dt:
+            if to_utc:
+                diff = datetime.datetime.utcnow() - dt
+                return humanize.naturaltime(diff)
+            else:
+                return humanize.naturaltime(dt)
+
+    def all_pdf_files(self, output_dir='output'):
+        """ List all PDF files templates """
+        result = list()
+        handle = self.context.get_handle(output_dir)
+        generator = handle.ilistdirinfo(files_only=True, wildcard='*pdf')
+        context_url = self.context.absolute_url()
+        for name, info in generator:
+            url = '{}/raw/{}/{}'.format(context_url, output_dir, name)
+            result.append(dict(
+                 url=url,
+                 title=name,
+                 created=info.get('created_time'),
+                 size=info.get('st_size')))
+        return sorted(result, key=lambda x: x.get('size', 0))
 
     def available_templates(self, template_dir='templates'):
         """ List all available templates """
@@ -46,6 +78,16 @@ class Web2Print(BrowserView):
                 title=title,
                 image_id=image_id))
         return result
+
+    def cleanup_output_directory(self, output_dir='output'):
+        """ Cleanup output directory """
+
+        handle = self.context.get_handle()
+        handle.removedir(output_dir, force=True)
+        handle.makedir(output_dir)
+        self.context.plone_utils.addPortalMessage(u'Conversion successful')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
+
 
     def parse_template(self, template=None):
 
@@ -141,7 +183,7 @@ class Web2Print(BrowserView):
 
             self.context.plone_utils.addPortalMessage(u'Conversion successful')
         else:
-            self.context.plone_utils.addPortalMessage(u'Conversion error')
+            self.context.plone_utils.addPortalMessage(u'Conversion error', 'error')
 
         f = furl.furl(self.context.absolute_url() + '/@@xmldirector-web2print')
         f.args = self.request.form
