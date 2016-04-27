@@ -9,6 +9,7 @@
 import os
 import furl
 import fs.path
+import json
 import datetime
 import requests
 import shutil
@@ -62,10 +63,10 @@ class Web2Print(BrowserView):
         """ List all available templates """
         result = list()
         handle = self.context.get_handle(template_dir)
-        files = handle.listdir(files_only=True, wildcard='*html')
+        files = handle.walkfiles(wildcard='*html')
         for name in sorted(files):
-
             # extract <title> from HTML
+            name = name.lstrip('/')
             with handle.open(name, 'rb') as fp:
                 root = lxml.html.fromstring(fp.read())
             nodes = root.xpath('//title')
@@ -177,10 +178,15 @@ class Web2Print(BrowserView):
             if not handle.exists('output'):
                 handle.makedir('output')
 
-            output_filename = 'output/{}.pdf'.format(datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
+            template_id, ext = os.path.splitext(os.path.basename(template))
+            output_filename = 'output/{}-{}.pdf'.format(template_id,datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
             with open(result['output_filename'], 'rb') as fp_in:
                 with handle.open(output_filename, 'wb') as fp_out:
                     fp_out.write(fp_in.read())
+
+            # write form parameter
+            with handle.open(output_filename + '.json', 'wb') as fp_out:
+                fp_out.write(json.dumps(self.request.form, indent=4))
 
             self.context.plone_utils.addPortalMessage(u'Conversion successful')
         else:
@@ -200,7 +206,8 @@ class Web2Print(BrowserView):
 
         result = requests.get(pdf_url)
         if result.status_code == 200:
-            output_filename = 'output/{}.pdf'.format(datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
+            template_id, ext = os.path.splitext(os.path.basename(template))
+            output_filename = 'output/{}-{}.pdf'.format(template_id,datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
             with handle.open(output_filename, 'wb') as fp:
                 fp.write(result.content)
 

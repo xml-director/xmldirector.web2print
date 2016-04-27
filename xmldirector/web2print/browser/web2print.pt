@@ -125,6 +125,7 @@
                 </div>
 
                 <input class="context" type="submit" value="Generate PDF" i18n:attributes="value"/>
+                <input class="context" type="reset" value="Reset form" i18n:attributes="value"/>
             </form>
         </fieldset>
 
