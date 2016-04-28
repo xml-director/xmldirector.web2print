@@ -7,8 +7,8 @@
         "iconUrl": "extensions/icons/draw-shape-brush.png"
     },
     "save-and-close": {
-        "title": "L_DRAW_SHAPE_BRUSH",
-        "iconText": "L_DRAW_SHAPE_BRUSH_TEXT",
+        "title": "Save and exit editor",
+        "iconText": "Save and exit editor",
         "ignoreReadOnly": false,
         "parent": "insert-shape-freehand",
         "iconUrl": "++resource++xmldirector.web2print/extensions/icons/draw-shape-brush.png"

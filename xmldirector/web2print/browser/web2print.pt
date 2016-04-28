@@ -11,6 +11,7 @@
 <metal:main fill-slot="content-core">
     <metal:content-core define-macro="content-core">
 
+        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/store.min.js"/>
         <!--
         <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/jquery.form-validator.min.js"/>
         -->

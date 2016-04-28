@@ -19,6 +19,7 @@ import humanize
 import fs.path
 import lxml.html
 
+import plone.api
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
@@ -152,6 +153,8 @@ class Web2Print(BrowserView):
                 with open(target_filename, 'wb') as fp_out:
                     fp_out.write(fp_in.read())
 
+
+        import pdb; pdb.set_trace() 
         # write index.html
         with open(os.path.join(temp_dir, 'index.html'), 'wb') as fp:
             fp.write(lxml.html.tostring(root, encoding='utf8'))
@@ -196,6 +199,16 @@ class Web2Print(BrowserView):
         f.args = self.request.form
         f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
         self.request.response.redirect(str(f))
+
+    def actionmap_json(self):
+
+        json_fn = os.path.join(os.path.dirname(__file__), 'resources', 'extensions', 'actionMap.ext.json')
+        with open(json_fn, 'rb') as fp:
+            data = json.load(fp)
+        portal_url = plone.api.portal.get().absolute_url()
+        data['save-and-close']['iconUrl']  = portal_url + '/' + data['save-and-close']['iconUrl']
+        self.request.response.setHeader('content-type', 'application/json')
+        self.request.response.write(json.dumps(data))
 
     def nimbudocs_set_content(self, *args, **kw):
 

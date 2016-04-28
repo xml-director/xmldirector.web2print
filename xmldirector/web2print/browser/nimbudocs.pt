@@ -21,7 +21,7 @@
         <script>
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
-
+              /*
                     actions = null;                
                     $.get({
                         type: 'GET',
@@ -35,11 +35,12 @@
                         actions = data;
                     });
 
-
+                    */
                 var options = {
                     collabUrl: "collab.html",
                     uiConfig:           PREFIX + "/extensions/uiconfig.json",
                     actionMapExtension: PREFIX + "/extensions/actionMap.ext.json",
+                    actionMapExtension: CONTEXT_URL + "/xmldirector-web2print-nimbudocs-actionmap.json",
                     //                    actionMap: actions,
                     localeExtension: {
                         "en-US": PREFIX + "/extensions/en-US.ext.json",
