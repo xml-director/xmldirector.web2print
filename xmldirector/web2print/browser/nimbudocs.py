@@ -52,12 +52,12 @@ class Nimbudocs(BrowserView):
             # write PDF + HTML
             template_id, ext = os.path.splitext(os.path.basename(template))
             now = datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S')                        
-            output_filename = 'output/{}-{}.pdf'.format(template_id, now)
-            with handle.open(output_filename, 'wb') as fp:
-                fp.write(result.content)
             output_filename = 'output/{}-{}.html'.format(template_id, now)
             with handle.open(output_filename, 'wb') as fp:
                 fp.write(html)
+            output_filename = 'output/{}-{}.pdf'.format(template_id, now)
+            with handle.open(output_filename, 'wb') as fp:
+                fp.write(result.content)
             # redirection url
             f = furl.furl('{}/@@xmldirector-web2print'.format(self.context.absolute_url()))
             f.args['template'] = template
