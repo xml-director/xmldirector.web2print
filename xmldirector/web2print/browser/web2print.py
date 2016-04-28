@@ -153,8 +153,6 @@ class Web2Print(BrowserView):
                 with open(target_filename, 'wb') as fp_out:
                     fp_out.write(fp_in.read())
 
-
-        import pdb; pdb.set_trace() 
         # write index.html
         with open(os.path.join(temp_dir, 'index.html'), 'wb') as fp:
             fp.write(lxml.html.tostring(root, encoding='utf8'))
@@ -198,38 +196,6 @@ class Web2Print(BrowserView):
         f = furl.furl(self.context.absolute_url() + '/@@xmldirector-web2print')
         f.args = self.request.form
         f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
+        f.add(fragment_path='pdf-files')
         self.request.response.redirect(str(f))
-
-    def actionmap_json(self):
-
-        json_fn = os.path.join(os.path.dirname(__file__), 'resources', 'extensions', 'actionMap.ext.json')
-        with open(json_fn, 'rb') as fp:
-            data = json.load(fp)
-        portal_url = plone.api.portal.get().absolute_url()
-        data['save-and-close']['iconUrl']  = portal_url + '/' + data['save-and-close']['iconUrl']
-        self.request.response.setHeader('content-type', 'application/json')
-        self.request.response.write(json.dumps(data))
-
-    def nimbudocs_set_content(self, *args, **kw):
-
-        html = self.request['html']
-        pdf_url = self.request['pdf_url']
-        template = self.request['template']
-        handle = self.context.get_handle()
-
-        result = requests.get(pdf_url)
-        if result.status_code == 200:
-            template_id, ext = os.path.splitext(os.path.basename(template))
-            output_filename = 'output/{}-{}.pdf'.format(template_id,datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S'))                        
-            with handle.open(output_filename, 'wb') as fp:
-                fp.write(result.content)
-
-            f = furl.furl('{}/@@xmldirector-web2print'.format(self.context.absolute_url()))
-            f.args['template'] = template
-            f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
-            f.add(fragment_path='pdf-files')
-            self.request.response.setStatus(200)                                               
-            return str(f)
-        else:
-            self.request.response.setStatus(500)
 

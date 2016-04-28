@@ -88,7 +88,7 @@
         <fieldset id="form" tal:condition="request/template | nothing">
             <legend i18n:translate="">Form-based PDF generation</legend>
 
-            <form method="post" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
+            <form method="post" id="data-entry" tal:attributes="action string:${context/absolute_url}/@@xmldirector-web2print-generate-pdf">
 
                 <input type="hidden" name="template" tal:attributes="value request/template" />
 
@@ -129,6 +129,7 @@
 
                 <input class="context" type="submit" value="Generate PDF" i18n:attributes="value"/>
                 <input class="context" type="reset" value="Reset form" i18n:attributes="value"/>
+                <input class="context" type="button" value="Clear form" id="clear-form" i18n:attributes="value"/>
             </form>
         </fieldset>
 
@@ -177,7 +178,15 @@
             </fieldset>
         </tal:def>
 
-        <script type="text/javascript"> $.validate(); </script>
+        <script type="text/javascript"> 
+            $(document).ready(function() {
+                $('#clear-form').on('click', function() {
+                    $('#data-entry :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+                    $('#data-entry :checkbox, :radio').prop('checked', false);
+                });
+            }); 
+        
+        </script>
   </metal:content-core>
 </metal:main>
 

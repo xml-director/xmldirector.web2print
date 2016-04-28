@@ -21,11 +21,6 @@
                             {
                                 "size": "mediumPanel",
                                 "actions": [
-                                    "new-document",
-                                    "load-url-dialog",
-                                    "page-properties-dialog",
-                                    "create-pdf-dialog",
-                                    "print-dialog",
                                     "save-and-close"
                                 ]
                             }
