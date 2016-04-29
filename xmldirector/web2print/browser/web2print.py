@@ -91,6 +91,17 @@ class Web2Print(BrowserView):
         self.context.plone_utils.addPortalMessage(u'Conversion successful')
         self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 
+    def recreate_previews(self, output_dir='output'):
+
+        handle = self.context.get_handle(output_dir)
+        for fn in handle.walkfiles(wildcard='*.html'):
+            basename, ext = os.path.splitext(fn)
+            cmd = 'pdfreactor  {} -o {}.pdf'.format(fn, basename)
+            os.system(cmd)
+            cmd  = 'convert -density 300 {}.pdf -resize 400 {}.png'.format(basename, basename)
+            os.system(cmd)
+        self.context.plone_utils.addPortalMessage(u'Preview recreated')
+        self.request.response.redirect(self.context.absolute_url() + '/@@xmldirector-web2print')
 
     def parse_template(self, template=None):
 
