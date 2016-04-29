@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="Web2Print: Convert"
+                acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+  </permissions>
+</rolemap>

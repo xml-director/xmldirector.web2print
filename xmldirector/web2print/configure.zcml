@@ -12,6 +12,11 @@
     <include package="Products.CMFCore" file="permissions.zcml" />
     <include package=".browser" />
 
+    <permission
+      id="xmldirector.web2print.convert"
+      title="Web2Print: Convert"
+    />
+
     <i18n:registerTranslations directory="locales" />
 
     <genericsetup:registerProfile
