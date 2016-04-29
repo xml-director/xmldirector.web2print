@@ -1,17 +1,31 @@
 {
-    "draw-shape-brush": {
-        "title": "L_DRAW_SHAPE_BRUSH",
-        "iconText": "L_DRAW_SHAPE_BRUSH_TEXT",
-        "ignoreReadOnly": false,
-        "parent": "insert-shape-freehand",
-        "iconUrl": "extensions/icons/draw-shape-brush.png"
-    },
     "save-and-close": {
         "title": "Save and exit editor",
         "iconText": "Save and exit editor",
         "ignoreReadOnly": false,
         "parent": "insert-shape-freehand",
-        "iconUrl": "++resource++xmldirector.web2print/extensions/icons/draw-shape-brush.png"
+        "iconUrl": "++resource++xmldirector.web2print/icons/save-and-close.png"
+    },
+    "local-save": {
+        "title": "Save document locally",
+        "iconText": "Save document locally",
+        "ignoreReadOnly": false,
+        "parent": "insert-shape-freehand",
+        "iconUrl": "++resource++xmldirector.web2print/icons/local-save.png"
+    },
+    "local-restore": {
+        "title": "Restore document locally",
+        "iconText": "Restore document locally",
+        "ignoreReadOnly": false,
+        "parent": "insert-shape-freehand",
+        "iconUrl": "++resource++xmldirector.web2print/extensions/icons/local-restore.png"
+    },
+    "exit": {
+        "title": "Exit editor",
+        "iconText": "Exit editor",
+        "ignoreReadOnly": false,
+        "parent": "insert-shape-freehand",
+        "iconUrl": "++resource++xmldirector.web2print/icons/exit.png"
     },
     "new-document": {
         "title": "L_NEW_DOCUMENT",

@@ -21,6 +21,9 @@
                             {
                                 "size": "mediumPanel",
                                 "actions": [
+                                    "exit",
+                                    "local-save",
+                                    "local-restore",
                                     "save-and-close"
                                 ]
                             }

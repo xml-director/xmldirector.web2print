@@ -37,6 +37,9 @@ class Nimbudocs(BrowserView):
             data = json.load(fp)
         portal_url = plone.api.portal.get().absolute_url()
         data['save-and-close']['iconUrl']  = portal_url + '/' + data['save-and-close']['iconUrl']
+        data['local-save']['iconUrl']  = portal_url + '/' + data['local-save']['iconUrl']
+        data['local-restore']['iconUrl']  = portal_url + '/' + data['local-restore']['iconUrl']
+        data['exit']['iconUrl']  = portal_url + '/' + data['exit']['iconUrl']
         self.request.response.setHeader('content-type', 'application/json')
         self.request.response.write(json.dumps(data))
 

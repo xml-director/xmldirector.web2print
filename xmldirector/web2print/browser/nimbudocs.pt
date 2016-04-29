@@ -11,6 +11,7 @@
         <!-- This script is found on the nimbudocs server. An absolute URL to the script should be used. -->
         <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
+        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/store.min.js"></script>
         <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/extensions/custom-actions.js"></script>
         <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
         <script type="text/javascript" tal:content="string:TEMPLATE = '${request/template}'"></script>
@@ -21,21 +22,6 @@
         <script>
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
-              /*
-                    actions = null;                
-                    $.get({
-                        type: 'GET',
-                        async: false,
-                        url: PORTAL_URL + "/++resource++xmldirector.web2print/extensions/actionMap.ext.json"
-                    }).done(function(data) {
-                        console.log(data['save-and-close']);
-                        data['save-and-close']['iconUrl'] = PORTAL_URL + data['save-and-close']['iconUrl'];
-                        console.log(data['save-and-close']);
-
-                        actions = data;
-                    });
-
-                    */
                 var options = {
                     collabUrl: "collab.html",
                     uiConfig:           PREFIX + "/extensions/uiconfig.json",
