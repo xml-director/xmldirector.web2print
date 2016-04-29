@@ -18,7 +18,7 @@
         "iconText": "Restore document locally",
         "ignoreReadOnly": false,
         "parent": "insert-shape-freehand",
-        "iconUrl": "++resource++xmldirector.web2print/extensions/icons/local-restore.png"
+        "iconUrl": "++resource++xmldirector.web2print/icons/local-restore.png"
     },
     "exit": {
         "title": "Exit editor",
