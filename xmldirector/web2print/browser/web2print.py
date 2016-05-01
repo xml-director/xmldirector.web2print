@@ -158,7 +158,7 @@ class Web2Print(BrowserView):
                     for child in node.getchildren():
                         child.getparent().remove(child)
                     style = node.attrib.get('style', '')
-                    style += ' white-space: pre'
+                    style += ' white-space: pre-line'
                     node.attrib['style'] = style
                     node.tail = None
                     node.children = []
