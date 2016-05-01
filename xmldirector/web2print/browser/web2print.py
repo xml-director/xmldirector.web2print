@@ -151,7 +151,17 @@ class Web2Print(BrowserView):
         for k, v in self.request.form.items():
             node = root.find('.//*[@id="{}"]'.format(k))
             if node is not None:
-                node.text = unicode(v, 'utf8')
+                node_type = node.attrib.get('type', '')
+                node.text = unicode(v, 'utf-8')
+                if node_type == 'text':
+                    # clear child nodes
+                    for child in node.getchildren():
+                        child.getparent().remove(child)
+                    style = node.attrib.get('style', '')
+                    style += ' white-space: pre'
+                    node.attrib['style'] = style
+                    node.tail = None
+                    node.children = []
 
         # copy resources
         temp_dir = tempfile.mktemp()
