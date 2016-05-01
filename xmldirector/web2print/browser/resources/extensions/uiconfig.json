@@ -21,6 +21,7 @@
                             {
                                 "size": "mediumPanel",
                                 "actions": [
+                                    "create-pdf-dialog",
                                     "exit",
                                     "local-save",
                                     "local-restore",
