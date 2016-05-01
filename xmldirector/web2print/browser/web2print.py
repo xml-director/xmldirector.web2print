@@ -214,6 +214,9 @@ class Web2Print(BrowserView):
         else:
             self.context.plone_utils.addPortalMessage(u'Conversion error', 'error')
 
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+
         f = furl.furl(self.context.absolute_url() + '/@@xmldirector-web2print')
         f.args = self.request.form
         f.args['output_url'] = '{}/@@view/{}'.format(self.context.absolute_url(), output_filename)
