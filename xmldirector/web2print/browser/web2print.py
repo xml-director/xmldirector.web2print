@@ -177,7 +177,7 @@ class Web2Print(BrowserView):
         # write index.html
         with open(os.path.join(temp_dir, 'index.html'), 'wb') as fp:
             fp.write(lxml.html.tostring(root, encoding='utf8'))
-                                                                                                                                               
+
         # Read Produce & Publish server URL settings from Plone registry
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IPPClientPloneSettings)
