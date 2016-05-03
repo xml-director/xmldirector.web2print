@@ -7,6 +7,9 @@ if (typeof(Storage) == "undefined") {
 function initCustomActions(editor){
 
     editor.addEventListener("local-save", "actioninvoke", function(e) {
+    alert('1');
+var notyfy = notyfy({text: 'notyfy - Yet another jQuery notification plugin'});
+    alert('2');
         editor.fetchDocument().then(function(v) {
             Storage.setItem(KEY, v);
         });

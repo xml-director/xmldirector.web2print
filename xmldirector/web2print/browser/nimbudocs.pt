@@ -12,8 +12,6 @@
         <script   src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://eubeta.nimbudocs.com/nimbudocseditor.js"></script>
         <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/extensions/custom-actions.js"></script>
-        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/pnotify/dist/pnotify.js"></script>
-        <script type="text/javascript" tal:attributes="src string:$portal_url/++resource++xmldirector.web2print/noty/js/noty/jquery.noty.js"></script>
 
         <script type="text/javascript" tal:content="string:PORTAL_URL = '${python: context.portal_url.getPortalObject().absolute_url()}'"></script>
         <script type="text/javascript" tal:content="string:TEMPLATE = '${request/template}'"></script>
